@@ -44,6 +44,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.TextField(default='type text')
+    quantity = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     def __str__(self):
         return f'Product #{self.pk} - Name: {self.name}'
