@@ -6,9 +6,14 @@
 
 {% block content %}
   <h1>NewsPost</h1>
-  {% if post %}
-    {{ post }}
-  {% else %}
-    <h2>No newspost</h2>
-  {% endif %}
+    <div>
+      <h3>Title: </h3>
+      <p> {{ post.title }}</p>
+      <hr>
+      <h3>Public date: </h3>
+      <p> {{ post.data_post_creation|date:"d M Y" }}</p>
+      <hr>
+      <h3>News: </h3>
+      <p> {{ post.text }}</p>
+    </div>
 {% endblock content %}
