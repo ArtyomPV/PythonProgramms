@@ -126,10 +126,14 @@
 >Product.objects.all().order_by('-price').values('name', 'price')
  
 >
- 
->
- 
->
+add more items...
+
+     from fastfoodApp.models import *
+     Product.objects.create(type='Dessert', name='Ice-Cake', price = 75, description='ice-cream')
+     Product.objects.create(type='Product.DRINK', name='Dark beer', price = 96, description='beer')      
+     Product.objects.create(type='Product.BURGER', name='King burger', price = 125, description='beef and bread')
+     Product.objects.create(type='Product.BURGER', name='burger', price = 95, description='beef and bread')       
+
  
 >
  
