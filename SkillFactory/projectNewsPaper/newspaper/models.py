@@ -12,11 +12,12 @@ class Author(models.Model):
         pRat = 0
         pRat += postRat.get('posting')
 
-        commRat = self.comment_set.all().aggregate(commenting=Sum('rating_comment'))
+        commRat = self.author_name.comment_set.all().aggregate(commenting=Sum(
+            'rating_comment'))
         cRat = 0
         cRat += commRat.get('commenting')
 
-        self.rating = 3 * pRat + commRat + 2
+        self.rating = 3 * pRat + cRat + 2
         self.save()
 
 
@@ -44,7 +45,7 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        return  self.text[0:123] + '...'
+        return self.text[0:123] + '...'
 
 
 class Category(models.Model):
