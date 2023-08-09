@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+
+{% block title %}
+    NewsPosts
+{% endblock title %}
+
+
+{% block content %}
+    <h1>All NewsPosts</h1>
+    {% if posts %}
+        {{ posts }}
+    {% else %}
+        <h2>No NewsPosts</h2>
+    {% endif %}
+{% endblock content %}

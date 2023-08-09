@@ -36,6 +36,9 @@ class Post(models.Model):
     rating_post = models.IntegerField(default=0)
     category = models.ManyToManyField('Category', through='PostCategory')
 
+    def __str__(self):
+        return f'Post #{self.pk} - Name: {self.title}'
+
     def like(self):
         self.rating_post += 1
         self.save()
