@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from .models import Product
 
