@@ -84,7 +84,7 @@ print("Лучшая статья:", best_article.data_post_creation.strftime("%d
 
 ### Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
 ```
-comments = Comment.objects.filter(comment=best_article)
+
 for c in comments:
       print("дата: " + str(c.data_comment_creation.strftime("%d.%m.%y %H:%M:%S")) + ", пользователь: " + str(c.author_comment.username) + ", рейтинг " + str(c.rating_comment) + ", текст комментария: " + str(c.text_comment))
 ```
