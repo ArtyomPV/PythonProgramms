@@ -8,6 +8,35 @@ Products
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-<h1>Все продукты</h1>
-{{ products }}
+    <h1>Все продукты</h1>
+    <hr>
+{% if products %}
+<h3>{{ time_now|date:"M d Y" }}</h3>
+<h3> {{ value1|default_if_none:"ничего" }} </h3>
+
+<!-- Здесь, если в переменной value1 будет записано None, то выведется текст НИЧЕГО -->
+        <table class="table">
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Количество</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description|truncatechars:5 }}</td>
+                <td>{{ product.get_type_display|safe }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+            {% endfor %}
+            {% include 'fastfoodApp/parts/paginator.html' %}
+        </table>
+    {% else %}
+        <h2>Товаров нет</h2>
+    {% endif %}
+
+
 {% endblock content %}
