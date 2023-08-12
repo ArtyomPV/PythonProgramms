@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os.path
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%=^(q&*ufl)eqnr$lkiuf992tm5ii(os$hxfwpo!&i251x$^xi'
+SECRET_KEY = 'django-insecure-0a4k6p+h(ap0^dz3hhe5@7k#m6#bogmvy8n-3kew02s1y+k8gv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,10 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',
-    'django.contrib.flatpages',
-
-    'bboard.apps.BboardConfig',
+    'bboard',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +56,7 @@ ROOT_URLCONF = 'samplesite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
