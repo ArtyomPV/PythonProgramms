@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'fastfoodApp',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
