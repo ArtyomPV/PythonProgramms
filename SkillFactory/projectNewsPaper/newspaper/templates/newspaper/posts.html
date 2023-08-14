@@ -25,6 +25,7 @@
             </tr>
             {% endfor %}
         </table>
+    {% include 'newspaper/parts/paginator.html' %}
     {% else %}
         <h2>No NewsPosts</h2>
     {% endif %}
