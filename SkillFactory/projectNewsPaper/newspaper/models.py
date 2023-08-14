@@ -7,6 +7,9 @@ class Author(models.Model):
     author_name = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f'{self.author_name.username}'
+
     def update_rating(self):
         postRat = self.post_set.all().aggregate(posting=Sum('rating_post'))
         pRat = 0
