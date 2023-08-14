@@ -11,17 +11,24 @@
             <p>News count: {{ posts|length }}</p>
         <hr>
     {% if posts %}
+    <form method="GET">
+       {{ filter.form }}
+       <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самим -->
+       <input class="btn btn-primary" type="submit" value="Найти">
+    </form>
         <table class="table">
             <tr>
                 <th scope="col">Заголовок</th>
                 <th scope="col">Дата публикации</th>
-                <th scope="col">текст статьи</th>
+                <th scope="col">Текст статьи</th>
+                <th scope="col">Автор</th>
             </tr>
             {% for post in posts %}
             <tr>
                 <td>{{ post.title|censored }}</td>
                 <td>{{ post.data_post_creation|date:"d M Y" }}</td>
-                <td>{{ post.text|censored|truncatewords:20 }}</td>
+                <td>{{ post.text|censored|truncatewords:15 }}</td>
+                <td>{{ post.author }}</td>
             </tr>
             {% endfor %}
         </table>
