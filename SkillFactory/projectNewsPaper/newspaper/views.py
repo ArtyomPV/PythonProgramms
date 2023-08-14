@@ -33,7 +33,7 @@ class Posts(View):
 
     def get(self, request):
         posts = Post.objects.order_by('-data_post_creation')
-        p = Paginator(posts, 10)
+        p = Paginator(posts, 3)
         posts = p.get_page(request.GET.get('page', 1))
         data = {
             'posts': posts,
