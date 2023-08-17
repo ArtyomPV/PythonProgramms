@@ -1,5 +1,6 @@
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Post
@@ -51,3 +52,34 @@ class Posts(View):
             'posts': posts,
         }
         return render(request, 'newspaper/posts.html', data)
+
+
+# дженерик для получения деталей о товаре
+class PostDetailView(DetailView):
+    template_name = 'newspaper/post_detail.html'
+    queryset = Post.objects.all()
+
+
+# дженерик для создания объекта. Надо указать только имя шаблона и класс формы, который мы написали в
+# прошлом юните. Остальное он сделает за вас
+class PostCreateView(CreateView):
+    template_name = 'newspaper/post_create.html'
+    form_class = PostForm
+
+
+class PostUpdateView(UpdateView):
+    template_name = 'newspaper/post_create.html'
+    form_class = PostForm
+
+    # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы
+    # собираемся редактировать
+    def get_object(self, **rwargs):
+        id = self.kwargs.get('pk')
+        return Post.objects.get(pk=id)
+
+
+# дженерик для удаления товара
+class PostDeleteView(DeleteView):
+    template_name = 'newspaper/post_delete.html'
+    queryset = Post.objects.all()
+    success_url = reverse_lazy('newspaper:posts')
