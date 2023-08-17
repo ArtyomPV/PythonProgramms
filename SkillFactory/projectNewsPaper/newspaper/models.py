@@ -32,7 +32,7 @@ class Post(models.Model):
         (POST, 'post')
     ]
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор')
-    post_type = models.CharField(max_length=2, choices=POSTS, default=NEWS)
+    post_type = models.CharField(max_length=2, choices=POSTS, default=NEWS, verbose_name='Тип статьи')
     data_post_creation = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     text = models.TextField()
