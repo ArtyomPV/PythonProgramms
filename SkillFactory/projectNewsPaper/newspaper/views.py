@@ -23,6 +23,7 @@ class PostsList(ListView):
     def get_queryset(self):
         return PostFilter(self.request.GET, super().get_queryset()).qs
 
+
 class PostDetail(DetailView):
     model = Post
     template_name = 'newspaper/post.html'
@@ -30,7 +31,6 @@ class PostDetail(DetailView):
 
 
 class Posts(View):
-
     def get(self, request):
         posts = Post.objects.order_by('-data_post_creation')
         p = Paginator(posts, 3)
