@@ -7,6 +7,9 @@ class Author(models.Model):
     author_name = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f'{self.author_name.username}'
+
     def update_rating(self):
         postRat = self.post_set.all().aggregate(posting=Sum('rating_post'))
         pRat = 0
@@ -28,16 +31,20 @@ class Post(models.Model):
         (NEWS, 'news'),
         (POST, 'post')
     ]
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    post_type = models.CharField(max_length=2, choices=POSTS, default=NEWS)
-    data_post_creation = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор')
+    post_type = models.CharField(max_length=2, choices=POSTS, default=NEWS, verbose_name='Тип статьи')
+    data_post_creation = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
+    title = models.CharField(max_length=255, verbose_name='Заголовок')
     text = models.TextField()
     rating_post = models.IntegerField(default=0)
     category = models.ManyToManyField('Category', through='PostCategory')
 
     def __str__(self):
         return f'Post #{self.pk} - Name: {self.title}'
+
+    def get_absolute_url(self):  # добавим абсолютный путь, чтобы после создания нас перебрасывало на
+        # страницу с товаром
+        return f'/news/{self.id}'
 
     def like(self):
         self.rating_post += 1
