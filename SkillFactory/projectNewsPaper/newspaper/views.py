@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -67,7 +69,7 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'newspaper/post_create.html'
     form_class = PostForm
 

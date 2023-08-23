@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'newspaper',
     'django_filters',
+    'sign',
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,8 @@ SITE_ID = 1
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "/static/newspaper",
+    BASE_DIR / "/static/sign",
 ]
+
+LOGIN_URL = 'sign/login/' # 4
+LOGIN_REDIRECT_URL = '/'
