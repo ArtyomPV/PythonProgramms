@@ -39,6 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    #########
+    # 3rd party apps
+    #########
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... здесь нужно указать провайдеры, которые планируете использовать
+    'allauth.socialaccount.providers.google',
+
+    #########
+    # User apps
+    #########
     'newspaper',
     'django_filters',
     'sign',
