@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from .forms import LoginForm
@@ -14,6 +14,23 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'sign/register.html'
     success_url = '/'
+
+    '''
+       Дополнительно можно включить пользователя в группу по умолчанию на этапе регистрации. Такая группа должна быть создана в БД, иначе появится сообщение об ошибке.
+       Для внесения дополнительных изменений на этапе создания записи в БД следует переопределить метод form_valid как показано ниже:
+       '''
+
+    def form_valid(self, form):
+        user = form.save()
+        # group = Group.objects.get(name='my_group') # Обращаемся к БД, находим нужную группу. Может
+        # оказаться, что такой группы в БД нет. Тогда получим ошибку. Надёжнее использовать метод
+        # get_or_create. Обратите внимание, что этот метод возвращает кортеж, поэтому мы обращаемся к
+        # первому элементу кортежа через скобки.
+        group = Group.objects.get_or_create(name='my_group')[0]
+
+        user.groups.add(group)  # добавляем нового пользователя в эту группу
+        user.save()
+        return super().form_valid(form)
 
 
 class LoginView(FormView):
