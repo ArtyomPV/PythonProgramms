@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Become author
+{% endblock title %}
+
+{% block content %}
+<h2> Be a author</h2>
+
+{% if is_not_author %}
+<a class="btn btn-info" href="{% url 'protect:upgrade' %}">Become author</a>
+{% else  %}
+<h3>Вы в группе Authors</h3>
+{% endif %}
+
+{% endblock content %}

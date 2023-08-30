@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'newspaper',
     'django_filters',
     'sign',
+    'protect',
 ]
 
 MIDDLEWARE = [
