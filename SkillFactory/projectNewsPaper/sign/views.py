@@ -26,7 +26,7 @@ class RegisterView(CreateView):
         # оказаться, что такой группы в БД нет. Тогда получим ошибку. Надёжнее использовать метод
         # get_or_create. Обратите внимание, что этот метод возвращает кортеж, поэтому мы обращаемся к
         # первому элементу кортежа через скобки.
-        group = Group.objects.get_or_create(name='my_group')[0]
+        group = Group.objects.get_or_create(name='common')[0]
 
         user.groups.add(group)  # добавляем нового пользователя в эту группу
         user.save()
