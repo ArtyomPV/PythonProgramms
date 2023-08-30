@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 # Create your views here.
@@ -64,13 +64,15 @@ class PostDetailView(DetailView):
 
 # дженерик для создания объекта. Надо указать только имя шаблона и класс формы, который мы написали в
 # прошлом юните. Остальное он сделает за вас
-class PostCreateView(CreateView):
+class PostCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'newspaper/post_create.html'
+    permission_required = 'newspaper.add_post'
     form_class = PostForm
 
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'newspaper/post_create.html'
+    permission_required = 'newspaper.change_post'
     form_class = PostForm
 
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы
@@ -81,7 +83,8 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
 
 # дженерик для удаления товара
-class PostDeleteView(DeleteView):
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'newspaper/post_delete.html'
+    permission_required = 'newspaper.delete_post'
     queryset = Post.objects.all()
     success_url = reverse_lazy('newspaper:posts')
