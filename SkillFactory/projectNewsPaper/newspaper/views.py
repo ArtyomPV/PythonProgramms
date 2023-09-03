@@ -1,9 +1,9 @@
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, resolve
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -88,3 +88,28 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'newspaper.delete_post'
     queryset = Post.objects.all()
     success_url = reverse_lazy('newspaper:posts')
+
+
+class CategoryListView(ListView):
+    model = Post
+    template_name = 'newspaper/category.html'
+    context_object_name = 'posts'
+    ordering = ['-data_post_creation']
+    paginate_by = 3
+
+    def get_queryset(self):
+        self.id = resolve(self.request.path_info).kwargs['pk']
+        print(resolve(self.request.path_info))
+        c = Category.objects.get(id=self.id)
+        queryset = Post.objects.filter(category = c)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        print(user.email)
+        category = Category.objects.get(id=self.id)
+        subscribed = category.subscribers.filter(email=user.email)
+        if not subscribed:
+            context['category'] = category
+        return context

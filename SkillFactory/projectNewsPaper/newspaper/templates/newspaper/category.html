@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'layout/base.html' %}
+
+
+{% block title %}
+  Category
+{% endblock title %}
+
+{% block content %}
+  <h1>Category</h1>
+{% if category.id %}
+<h1>{{ category }}</h1>
+{% endif %}
+
+{% endblock content %}
