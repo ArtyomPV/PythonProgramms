@@ -164,3 +164,21 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 
 ACCOUNT_FORMS = {'signup': 'sign.forms.BasicSignupForm'}
+
+# --------------- setting to email -------------
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'artyom.pv'
+EMAIL_HOST_PASSWORD = 'gvyakgemctxwnofg'
+# EMAIL_HOST_USER=os.getenv("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD=os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_SSL = True
+
+ADMINS = [
+    ('Arty', 'artpv@mail.ru'),
+    # список всех админов в формате ('имя', 'их почта')
+]
+SERVER_EMAIL = 'artyom.pv@yandex.ru' # это будет у нас вместо аргумента FROM в массовой рассылке
+
+DEFAULT_FROM_EMAIL = 'artyom.pv@yandex.ru'
+# --------------- setting to email -------------
