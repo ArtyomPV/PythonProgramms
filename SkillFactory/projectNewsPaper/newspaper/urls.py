@@ -12,6 +12,7 @@ urlpatterns = [
     path('news/', Posts.as_view()),
     path('category/<int:pk>/', CategoryListView.as_view(), name='category'),
     path('subscribe/<int:pk>/', subscribe_to_category, name='subscribe'),
+    # path('unsubscribe/<int:pk>/', unsubscribe_from_category, name='unsubscribe'),
     path('unsubscribe/<int:pk>/', unsubscribe_from_category, name='unsubscribe'),
 
 

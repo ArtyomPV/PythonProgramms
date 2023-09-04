@@ -59,7 +59,7 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, default='History')
     subscribers = models.ManyToManyField(User, blank=True)
 
     def __str__(self):

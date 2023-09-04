@@ -182,3 +182,6 @@ SERVER_EMAIL = 'artyom.pv@yandex.ru' # это будет у нас вместо 
 
 DEFAULT_FROM_EMAIL = 'artyom.pv@yandex.ru'
 # --------------- setting to email -------------
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

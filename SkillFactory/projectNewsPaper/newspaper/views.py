@@ -113,8 +113,12 @@ class CategoryListView(ListView):
         # print(user.email)
         category = Category.objects.get(id=self.id)
         subscribed = category.subscribers.filter(email=user.email)
+        is_subscribed = False
+        context['category'] = category
+        context['is_subscribed'] = False
         if not subscribed:
-            context['category'] = category
+            is_subscribed = True
+        context['is_subscribed'] = is_subscribed
         return context
 
 
@@ -123,8 +127,10 @@ def subscribe_to_category(request, pk):
     print('======user=========')
     print(user)
     category = Category.objects.get(id=pk)
+    print(category.subscribers)
     if not category.subscribers.filter(id=user.id).exists():
         category.subscribers.add(user)
+        print(category.subscribers)
         email = user.email
         html_content = render_to_string(
             'newspaper/subscribed.html',
@@ -148,7 +154,10 @@ def subscribe_to_category(request, pk):
 @login_required
 def unsubscribe_from_category(request, pk):
     user = request.user
+
     category = Category.objects.get(id=pk)
+
     if category.subscribers.filter(id=user.id).exists():
+
         category.subscribers.remove(user)
     return redirect('newspaper:posts')
