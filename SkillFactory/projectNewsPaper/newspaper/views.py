@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, resolve
 from django.views import View
@@ -9,6 +10,7 @@ from .filters import PostFilter
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.mail import EmailMultiAlternatives
+
 
 # Create your views here.
 
@@ -135,9 +137,18 @@ def subscribe_to_category(request, pk):
             subject=f'{category} subscription',
             body='',
             from_email='artyom.pv@yandex.ru',
-            to=[email,],
+            to=[email, ],
         )
         msg.attach_alternative(html_content, 'text/html')
         msg.send()
         return redirect('newspaper:posts')
+    return redirect('newspaper:posts')
+
+
+@login_required
+def unsubscribe_from_category(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    if category.subscribers.filter(id=user.id).exists():
+        category.subscribers.remove(user)
     return redirect('newspaper:posts')
