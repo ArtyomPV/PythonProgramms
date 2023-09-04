@@ -1,0 +1,29 @@
+<!doctype html>
+{% load custom_filters %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Post</title>
+</head>
+<body>
+    <h1>New Post in your favorite category</h1>
+    <p>
+        In category
+        <strong>{{ category.name }}</strong>
+        there is a new post by
+        <strong>
+            {{ post.author }}
+        </strong>
+    </p>
+    <a href="http://127.0.0.1:8000{% url 'newspaper:post_detail' post.id %}">
+        <h2>{{ post.text|censored|truncatewords:15  }}</h2>
+    </a>
+<p>
+    {{post}}
+</p>
+    
+</body>
+</html>
