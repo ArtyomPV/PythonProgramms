@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # не забываем импортировать класс формы аутентификации
 from django.contrib.auth.models import User
 from django import forms
+from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
 
 
@@ -42,17 +43,15 @@ class RegisterForm(UserCreationForm):
 
 # Добавляем новую форму для аутентификации пользователя
 class LoginForm(AuthenticationForm):
-
     class Meta:
-       model = User
-       fields = (
-         "username",
-         "password",
-           )
+        model = User
+        fields = (
+            "username",
+            "password",
+        )
 
 
-from allauth.account.forms import SignupForm
-from django.contrib.auth.models import Group
+
 
 
 class BasicSignupForm(SignupForm):

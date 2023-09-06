@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     #########
     # User apps
     #########
-    'newspaper',
+    'newspaper.apps.NewspaperConfig',
     'django_filters',
     'sign',
     'protect',
@@ -146,6 +146,7 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/accounts/login/'
+# LOGIN_URL = 'sign/login/'
 LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = [
@@ -158,7 +159,7 @@ AUTHENTICATION_BACKENDS = [
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
@@ -168,19 +169,26 @@ ACCOUNT_FORMS = {'signup': 'sign.forms.BasicSignupForm'}
 # --------------- setting to email -------------
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'artyom.pv'
+EMAIL_HOST_USER = 'artyom.pv@yandex.ru'
 EMAIL_HOST_PASSWORD = 'gvyakgemctxwnofg'
 # EMAIL_HOST_USER=os.getenv("EMAIL_HOST_USER")
 # EMAIL_HOST_PASSWORD=os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
 
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+
+SERVER_EMAIL = 'artyom.pv@yandex.ru'  # это будет у нас вместо аргумента FROM в массовой рассылке
+
+# DEFAULT_FROM_EMAIL = 'artyom.pv@yandex.ru'
+
 ADMINS = [
     ('Arty', 'artpv@mail.ru'),
+    ('Artyom', 'itcoding76@gmail.com'),
     # список всех админов в формате ('имя', 'их почта')
 ]
-SERVER_EMAIL = 'artyom.pv@yandex.ru' # это будет у нас вместо аргумента FROM в массовой рассылке
 
-DEFAULT_FROM_EMAIL = 'artyom.pv@yandex.ru'
 # --------------- setting to email -------------
 
 if DEBUG:
